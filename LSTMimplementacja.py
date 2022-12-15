@@ -5,6 +5,7 @@ from sklearn.preprocessing import MinMaxScaler
 from labels import zbiorX, Y
 from sklearn.model_selection import train_test_split
 from keras.layers import LSTM, Dense
+
 print(np.array(Y).shape)
 print(np.array(zbiorX).shape)
 print(zbiorX)

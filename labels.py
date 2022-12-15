@@ -1,5 +1,4 @@
 import os
-import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 
@@ -15,7 +14,7 @@ lines = text_file.readlines()
 for iter,line in enumerate(lines):
     x = line[:-2]
     x = x.split(',')
-    print(iter)
+    #print(iter)
     for j , val in enumerate(x):
         if val == '':
             continue
@@ -53,14 +52,26 @@ print("check3")
 check(arr3)
 scaler = MinMaxScaler()
 X = arr1 + arr2 + arr3
-X_train_minmax = scaler.fit_transform(X)
+Xminmax = scaler.fit_transform(X)
+#print(Xminmax)
+#print(len(Xminmax))
+zbiorX  = []
+zbior120 = []
+for i in range(len(Xminmax)):
+    a = Xminmax[i]
+    zbior120.append(a)
+    if len(zbior120) == 120:
+        zbiorX.append(zbior120)
+        zbior120 = []
+#print(len(zbiorX))
+#print(zbiorX)
+Y = np.ones((300,1))
+for i in range(len(Y)):
+    if i > 98 and i < 199:
+        Y[i] = 2
+    if i > 199:
+        Y[i] = 3
 
-y1 = np.ones((12000, 1))
-y2 = np.ones((12000, 1))
-y2[np.where(y2==1)]=2
-y3 = np.ones((12000, 1))
-y3[np.where(y3==1)]=3
-yy = np.vstack([y1, y2])
-Y = np.vstack([yy,y3])
-Y = pd.DataFrame(Y)
-label = Y.to_numpy()
+
+#print(Y[299])
+#print(count)
