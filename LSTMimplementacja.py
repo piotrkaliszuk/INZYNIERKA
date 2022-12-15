@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn import metrics
 from keras.models import Sequential
 from sklearn.preprocessing import MinMaxScaler
 from labels import zbiorX, Y
@@ -48,3 +50,14 @@ plt.show()
 loss, accuracy = model.evaluate(X_test, y_test, batch_size = 32, verbose = 1)
 print("Test Accuracy :", accuracy)
 print("Test Loss :", loss)
+
+predictions = model.predict(X_test)
+class_labels = ['Jedna', 'Dwie', 'Trzy']
+max_test = np.argmax(y_test, axis=1)
+max_predictions = np.argmax(predictions, axis=1)
+confusion_matrix = metrics.confusion_matrix(max_test, max_predictions)
+sns.heatmap(confusion_matrix, xticklabels = class_labels, yticklabels = class_labels, annot = True, linewidths = 0.1, fmt='d', cmap = 'YlGnBu')
+plt.title("Confusion matrix", fontsize = 15)
+plt.ylabel('True label')
+plt.xlabel('Predicted label')
+plt.show()
