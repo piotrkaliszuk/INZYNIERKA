@@ -1,3 +1,6 @@
+
+# PROJECT INFO:
+Praca inżynierska opierająca się o klasyfikacje drgań wywoływanych podczas chodu.
 # 💫 About Me:
 AMW IT Student<br>
 
