@@ -1,22 +1,32 @@
 import numpy as np
-srodowisko_wiersze = 6
-srodowisko_kolumny = 6
+srodowisko_wiersze = 12
+srodowisko_kolumny = 12
 wartosciQ = np.zeros((srodowisko_wiersze, srodowisko_kolumny, 4)) #Q
 #print(wartosciQ)
 kierunki = ['up', 'down', 'right', 'left']
 
-nagrody = np.full((srodowisko_wiersze, srodowisko_kolumny), -100) #środowisko
-nagrody[0, 4] = 100
+nagrody = np.full((srodowisko_wiersze, srodowisko_kolumny), -100)
+nagrody[0, 8] = 100
 przejścia = {}
-przejścia[1] = [1, 2, 3,4]
-przejścia[2] = [0, 1, 2]
-przejścia[3] = [2, 3,4]
-przejścia[4] = [1, 2, 3, 4]
+przejścia[1] = [1, 2, 3,4,5,6,7,8]
+przejścia[2] = [0, 1, 2,3,4,5,6,7,8]
+przejścia[3] = [2, 3,4,5,6,7,8,9,10]
+przejścia[4] = [1, 2, 3, 4,5,6,7,8,9,10]
+przejścia[5] = [1, 2, 3, 4,5,6,7,10,11]
+przejścia[6] = [1, 2, 3, 4,5,6]
+przejścia[7] = [1, 2, 3, 4,5,6,7,8]
+przejścia[8] = [3, 4,5,6,7,8,9,10]
+przejścia[9] = [2, 3, 4,5,6,7,8]
+przejścia[10] = [1, 2, 3, 4,5,6]
 
-for wiersz in range(1, 5): #Podstawienie -1 pod odpowiednie indeksy
+
+for wiersz in range(1, 11): #Podstawienie -1 pod odpowiednie indeksy
     for kolumna in przejścia[wiersz]:
         nagrody[wiersz, kolumna] = -1
-print(nagrody)
+
+for row in nagrody:
+  print(row)
+
 def czy_przeszkoda(curr_wiersz, curr_kolumna):
   if nagrody[curr_wiersz, curr_kolumna] == -1:
     return False
@@ -63,7 +73,7 @@ def droga(wiersz, kolumna): #wyznaczenie najkrótszej drogi
 eps = 0.9
 gamma = 0.8
 alfa = 0.8
-for x in range(100): #główna pętla
+for x in range(1000): #główna pętla
     wiersz, kolumna = losowy_start()
     #print(wiersz,kolumna)
     while not czy_przeszkoda(wiersz, kolumna):
@@ -78,4 +88,4 @@ for x in range(100): #główna pętla
         #print(wartosciQ)
 print(wartosciQ)
 
-print(droga(4,3))
+print(droga(10,2))
